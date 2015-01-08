@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="example_test1" model="example.test">
+            <field name="name">Test 1</field>
+            <field name="date" eval="time.strftime('%Y')+'-01-30'"/>
+        </record>
+    </data>
+</openerp>
+

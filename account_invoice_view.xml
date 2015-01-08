@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="invoice_tree">
+            <field name="name">account.invoice.tree.inherited</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="comment"/>
+                </field>
+                <field name="partner_id" position="after">
+                    <field name="test_field"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="invoice_form">
+            <field name="name">account.invoice.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <field name="fiscal_position" position="after">
+                    <field name="test_field" />
+                </field>
+
+                <xpath expr="/form/sheet[@string='Invoice']/notebook/page[@string='Other Info']" position="after">
+                    <page string="Test Tab">
+                        <div id="test-tab">
+                            <script type="text/javascript">// <![CDATA[
+                                jQuery(document).ready (function () {
+                                    jQuery(".oe_view_manager_pager").prepend ("Hello, world!");
+                                    jQuery(".oe_view_manager_pager").prepend (
+                                        '<a href="javascript: openerp.example.account_invoice_toggle_column (\'date_invoice\');">Toggle date</a>'
+                                    );
+
+                                    openerp.example.account_invoice_hello ();
+                                });
+                      // ]]></script>
+                            <h3><a onclick="openerp.example.account_invoice_hello ();">Get Test objects</a></h3>
+                        </div>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- reorder "Accounting" top menu -->
+        <menuitem id="account.menu_finance" name="Accounting" sequence="0"/>
+
+    </data>
+</openerp>
+

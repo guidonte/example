@@ -1,0 +1,10 @@
+.openerp .oe_example {
+  height: 100%;
+  padding: 0px 20px;
+}
+
+.openerp .oe_example #gmap {
+  width: 500px;
+  height: 400px;
+}
+

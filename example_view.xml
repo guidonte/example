@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="test_tree">
+            <field name="name">example.test.tree</field>
+            <field name="model">example.test</field>
+            <field name="priority" eval="15"/>
+            <field name="arch" type="xml">
+                <tree colors="" string="Test">
+                    <field name="name"/>
+                    <field name="date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="test_form_basic">
+            <field name="name">example.test.form_basic</field>
+            <field name="model">example.test</field>
+            <field name="priority" eval="15"/>
+            <field name="arch" type="xml">
+                <form string="Test" version="7.0">
+                    <sheet>
+                        <group>
+                            <field string="Name" name="name"/>
+                            <field name="date"/>
+                        </group>
+                        <field name="lines" widget="one2many_list" readonly="0">
+                            <tree string="test lines" editable="bottom">
+                                <field name="description"/>
+                                <field name="total_amount"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="test_form">
+            <field name="name">example.test.form</field>
+            <field name="model">example.test</field>
+            <field name="arch" type="xml">
+                <form string="Test" version="7.0">
+                    <sheet>
+                        <header>
+                            <h1>
+                                Test object
+                            </h1>
+                        </header>
+                        <group>
+                            <field string="Name" name="name"/>
+                            <field string="Date" name="date"/>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Test Lines">
+                                <field name="lines" widget="one2many_list" readonly="0">
+                                    <tree string="Test Lines" editable="bottom">
+                                        <field name="description"/>
+                                        <field name="quantity"/>
+                                        <field name="unit_price"/>
+                                        <field name="total_amount"/>
+                                    </tree>
+                                </field>
+                                <group>
+                                    <field name="objects" widget="many2many_checkboxes"/>
+                                </group>
+                                <html>
+                                    <h2>
+                                        Section
+                                    </h2>
+                                    <div id="test-section">
+                                    </div>
+                                </html>
+                            </page>
+                            <page string="Test Lines in new window">
+                                <field name="lines_new_window" widget="one2many_list" readonly="0">
+                                    <tree string="Test Lines">
+                                        <field name="description"/>
+                                        <field name="total_amount"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Other Page">
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="test_line_form">
+            <field name="name">example.test.line.form</field>
+            <field name="model">example.test.line</field>
+            <field name="arch" type="xml">
+                <form string="Test" version="7.0">
+                    <group>
+                        <field name="description"/>
+                        <field name="quantity"/>
+                        <field name="unit_price"/>
+                        <field name="total_amount"/>
+                        <field name="notes" widget="one2many_list" readonly="0">
+                            <tree string="Test Notes" editable="bottom">
+                                <field name="text"/>
+                            </tree>
+                        </field>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="test_note_form">
+            <field name="name">example.test.note.form</field>
+            <field name="model">example.test.note</field>
+            <field name="arch" type="xml">
+                <form string="Test" version="7.0">
+                    <group>
+                        <field name="text"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="example_test_tree">
+            <field name="name">Test objects</field>
+            <field name="res_model">example.test</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="example_test_tree_basic">
+            <field name="name">Test objects</field>
+            <field name="res_model">example.test</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="test_form_basic"/>
+        </record>
+
+        <record id="action_example_test_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="test_tree"/>
+            <field name="act_window_id" ref="example_test_tree"/>
+        </record>
+
+        <record id="action_example_test_view2" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="test_form"/>
+            <field name="act_window_id" ref="example_test_tree"/>
+        </record>
+
+        <record model="ir.actions.client" id="action_client_example">
+            <field name="tag">example.action</field>
+        </record>
+
+        <menuitem id="menu_client_example"
+                  name="Example"
+                  sequence="-1" />
+
+        <menuitem id="menu_client_example_2"
+                  parent="menu_client_example"
+                  name="Test" />
+
+        <menuitem id="menu_client_example_3"
+                  parent="menu_client_example_2"
+                  name="Example"
+                  groups="base.group_erp_manager"
+                  action="action_client_example" />
+
+        <menuitem id="menu_client_example_4"
+                  parent="menu_client_example_2"
+                  name="Test"
+                  action="example_test_tree" />
+
+        <menuitem id="example_test"
+                  name="Test"
+                  parent="account.menu_finance_receivables"
+                  action="example_test_tree_basic"
+                  sequence="-100"/>
+
+<!--
+        <delete model="ir.ui.menu" search="[('name','=','Messaging')]">
+-->
+
+    </data>
+</openerp>
+

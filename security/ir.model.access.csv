@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_example_test,access_example_test,model_example_test,,1,1,1,1
+access_example_test_line,access_example_test_line,model_example_test_line,,1,1,1,1
+access_example_test_line_user,access_example_test_line_user,model_example_test_line,group_example_user,1,0,0,0
+access_example_test_note,access_example_test_note,model_example_test_note,,1,1,1,1
+access_example_obj,access_example_obj,model_example_obj,base.group_erp_manager,1,1,1,1
+access_example_obj_user,access_example_obj_user,model_example_obj,group_example_user,1,0,0,0
+
